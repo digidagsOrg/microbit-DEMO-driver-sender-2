@@ -21,8 +21,6 @@ input.onButtonPressed(Button.A, function () {
                 `)
             stop = 0
         }
-    } else {
-    	
     }
 })
 function selectProgram () {
@@ -60,8 +58,6 @@ input.onButtonPressed(Button.AB, function () {
                 `)
             stop = 0
         }
-    } else {
-    	
     }
 })
 input.onButtonPressed(Button.B, function () {
