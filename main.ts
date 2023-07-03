@@ -1,28 +1,3 @@
-input.onButtonPressed(Button.AB, function () {
-    if (program == 0) {
-        if (stop == 0) {
-            radio.sendNumber(3)
-            stop = 1
-            basic.showLeds(`
-                # . . . #
-                # . . . #
-                # . . . #
-                # . . . #
-                # . . . #
-                `)
-        } else {
-            radio.sendNumber(33)
-            basic.showLeds(`
-                # # . # #
-                # # . # #
-                # # . # #
-                # # . # #
-                # # . # #
-                `)
-            stop = 0
-        }
-    }
-})
 input.onButtonPressed(Button.A, function () {
     if (program == 0) {
         if (stop == 0) {
@@ -45,6 +20,33 @@ input.onButtonPressed(Button.A, function () {
                 # # . . .
                 `)
             stop = 0
+        }
+    } else {
+        if (program == 1) {
+            if (input.buttonIsPressed(Button.A) && Pnumber == 4) {
+                basic.showNumber(0)
+                Pnumber = 0
+            } else {
+                if (Pnumber == 0) {
+                    basic.showNumber(1)
+                    Pnumber = 1
+                } else {
+                    if (Pnumber == 1) {
+                        basic.showNumber(2)
+                        Pnumber = 2
+                    } else {
+                        if (Pnumber == 2) {
+                            basic.showNumber(3)
+                            Pnumber = 3
+                        } else {
+                            if (Pnumber == 3) {
+                                basic.showNumber(4)
+                                Pnumber = 4
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 })
@@ -87,11 +89,45 @@ input.onButtonPressed(Button.B, function () {
                 `)
             stop = 0
         }
+    } else {
+        if (program == 1) {
+            radio.sendNumber(Pnumber)
+        }
+    }
+})
+input.onButtonPressed(Button.AB, function () {
+    if (program == 0) {
+        if (stop == 0) {
+            radio.sendNumber(3)
+            stop = 1
+            basic.showLeds(`
+                # . . . #
+                # . . . #
+                # . . . #
+                # . . . #
+                # . . . #
+                `)
+        } else {
+            radio.sendNumber(33)
+            basic.showLeds(`
+                # # . # #
+                # # . # #
+                # # . # #
+                # # . # #
+                # # . # #
+                `)
+            stop = 0
+        }
+    } else {
+        if (program == 0) {
+            radio.sendString("stop")
+        }
     }
 })
 let stop = 0
 let program = 0
 let Pnumber = 0
+Pnumber = 0
 program = selectProgram()
 if (program == 0) {
     radio.setGroup(1)
@@ -103,34 +139,3 @@ if (program == 0) {
         basic.showIcon(IconNames.Happy)
     }
 }
-basic.forever(function () {
-    if (program == 1) {
-        if (input.buttonIsPressed(Button.A) && Pnumber == 4) {
-            basic.showNumber(0)
-            Pnumber = 0
-        } else {
-            if (input.buttonIsPressed(Button.A) && Pnumber == 0) {
-                basic.showNumber(1)
-                Pnumber = 1
-            } else {
-                if (input.buttonIsPressed(Button.A) && Pnumber == 1) {
-                    basic.showNumber(2)
-                    Pnumber = 2
-                } else {
-                    if (input.buttonIsPressed(Button.A) && Pnumber == 2) {
-                        basic.showNumber(3)
-                        Pnumber = 3
-                    } else {
-                        if (input.buttonIsPressed(Button.A) && Pnumber == 3) {
-                            basic.showNumber(4)
-                            Pnumber = 4
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if (input.buttonIsPressed(Button.B)) {
-        radio.sendNumber(Pnumber)
-    }
-})
