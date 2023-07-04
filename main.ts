@@ -129,7 +129,7 @@ let stop = 0
 let program = 0
 let Pnumber = 0
 Pnumber = 0
-// call select
+// call selectProgram
 program = 0
 if (program == 0) {
     radio.setGroup(1)
